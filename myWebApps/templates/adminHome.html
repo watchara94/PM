@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+	.ssp {font-family: 'Source Sans Pro', sans-serif}
+	body {margin:0;}
+	* {
+	box-sizing: border-box;
+	}
+
+	fieldset {
+  display: block;
+  margin-left: 10px;
+  margin-right: 2px;
+  padding-top: 0.35em;
+  padding-bottom: 0.625em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  border: 2px groove (internal value);
+  width:380px;
+	font-size:18px;
+	}
+	.small {
+	  width:300px;
+	}
+	.left {
+	  float:left;
+	  width:50%;
+	}
+	.right {
+	  float:left;
+	  width:50%;
+	}
+	.button {
+	  background-color: #4CAF50; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 16px 32px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+		margin-left: 10px;
+	  margin-right: 2px;
+	  -webkit-transition-duration: 0.4s; /* Safari */
+	  transition-duration: 0.4s;
+	  cursor: pointer;
+	}
+	.button1 {
+	  background-color: white;
+	  color: black;
+	  border: 2px solid #000000;
+		position: relative;
+	}
+
+	.button1:hover {
+	  background-color: #000000;
+	  color: white;
+	}
+	.rightmenu {
+		font-family: 'Source Sans Pro', sans-serif; background-color: green;
+	}
+	.leftmenu {
+		font-family: 'Source Sans Pro', sans-serif; background-color: grey;
+	}
+	ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	  overflow: hidden;
+	  background-color: black	;
+	  position: fixed;
+	  top: 0;
+	  width: 100%;
+	}
+
+	li {
+	  float: left;
+	}
+
+	li a {
+	  display: block;
+	  color: white;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	}
+
+	.rightmenu {
+	  background-color: red;
+	  font-family: 'Source Sans Pro', sans-serif
+	}
+	.fix{
+		background: url(https://www.mx7.com/i/22e/GfDUpm.JPG?fbclid=IwAR2s66fi7kWsj7ERaNnveSpOiOaJqgvvSE1x_EUOSHHzRlBRTHLE_zKfpV0);
+		background-size: cover;
+		margin: 0;
+		padding: 0;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		height: 100vh;
+		z-index: -6;	
+		}
+	.overlay1{
+		position: absolute;
+		background-color: rgba(0, 0, 0, 0.6);
+		height: 100%;
+		width: 100%;
+		z-index: -5;
+	}	
+	</style>
+</head>
+	<body>
+	<div class="fix"><div class="overlay1"></div></div>
+	<ul>
+		<li><img src="https://www.kmutnb.ac.th/getattachment/about/symbols/logo_kmutnb-(6).png.aspx?width=250&height=246" width="42" height="42"></li>
+		<li><a class="ssp" style="color: white">ADMIN</a></li>
+        <li style="float:right"><a class="rightmenu" href="{% url 'myWeb:logout' %}">Logout</a></li>
+        <li style="float:right"><a href="{% url 'myWeb:home' %}" class="ssp" >{{ user.get_username }}</a></li>
+		<li><a class ="leftmenu" href="{% url 'myWeb:home' %}">USER</a></li>
+		<li><a class ="leftmenu" href="{% url 'myWeb:home_package' %}">PACKAGE</a></li>
+	</ul>
+	</br>
+	</br>
+		<fieldset class="small">
+		 <legend><h3 class="ssp" style="color: white">Admin</h3></legend>
+			<span class="ssp" style="color: white">{{user.username}}<br><br></span>
+			<form action="{% url 'myWeb:changepass' %}" method="post">
+			<span class="ssp" style="color: white">{% csrf_token %}</span>
+				<input type="submit" value="Change Password">
+			</form>
+		</fieldset>
+		{% if package %}
+			<fieldset>
+			<legend><h3 class="ssp" style="color: white">list of packages</h3></legend>
+				<table border="1">
+				<tr  class="ssp" style="color: white">
+					<th>Package ID</th>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Material</th>
+					<th>Points</th>
+				</tr>
+						{% for p in list_package %}
+							<div style="overflow-x:auto;"></div>
+							<tr>
+								<form action="{% url 'myWeb:package_action' p.package_id %}" method="post">
+								{% csrf_token %}
+								<td><input type="text" name="package_id" placeholder={{p.package_id}} value={{p.package_id}}></td>
+								<td><input type="text" name="name" placeholder={{p.name}} value={{p.name}}></td>
+								<td>
+									<select name="type">
+										<option value={{p.type}}>{{p.type}}</option>
+										<option value=Can>Can</option>
+										<option value=Bottle>Bottle</option>
+									</select>
+								</td>
+								<td>
+									<select name="material">
+										<option value={{p.material}}>{{p.material}}</option>
+										<option value=Plastic>Plastic</option>
+										<option value=Metel>Meltel</option>
+									</select>
+								</td>
+								<td><input type="text" name="points" placeholder={{p.points}} value={{p.points}}></td>
+								<td><input type="submit" name="save" value="Save"></td>
+								<td><input type="submit" name="delete" value="Delete"></td>
+								</form>
+							</tr>
+
+							</div>
+						</form>
+						{% endfor %}
+								<form action="{% url 'myWeb:new_package' %}" method="post">
+								{% csrf_token %}
+								<tr>
+								<td><input type="text" name="package_id" placeholder="package_id"></td>
+								<td><input type="text" name="name" placeholder="name"></td>
+								<td>
+									<select name="type">
+										<option value=Can>Can</option>
+										<option value=Bottle>Bottle</option>
+									</select>
+								</td>
+								<td>
+									<select name="material">
+										<option value=Plastic>Plastic</option>
+										<option value=Metel>Metel</option>
+									</select>
+								</td>
+								<td><input type="text" name="points" placeholder="points"></td>
+								<td><input type="submit" value="New"></td>
+								</tr>
+								</form>
+				</table>
+			</fieldset>
+			{{ err }}
+			</br>
+		{% else %}
+			<fieldset>
+			<legend><h3 class="ssp" style="color: white">list of users</h3></legend>
+				<span class="ssp" style="color: white">{% for u in list_user  %}</span>
+					<a href="{% url 'myWeb:userPage' u.id %}">{{u.username}}</a></br>
+				{% endfor %}
+			</fieldset>
+		{% endif %}
+	</body>
+</html>

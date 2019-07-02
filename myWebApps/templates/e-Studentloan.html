@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>e-Studentloan</title>
+        <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+        <style>
+            body{
+                margin: 0%;
+                padding: 0%;
+            }
+            .kanit {font-family : 'Kanit', sans-serif;}
+            fieldset {
+                display: block;
+                margin-left: 10px;
+                margin-right: 2px;
+                padding-top: 0.35em;
+                padding-bottom: 0.625em;
+                padding-left: 0.75em;
+                padding-right: 0.75em;
+                border: 2px groove (internal value);
+                width:550px;
+                font-size:18px;
+                }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color:none	;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                }
+                .center {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;
+                  }
+                .box{
+                    position:absolute;
+                    top: -100px;
+                    left: 50%;
+                    transform: translate(-50%,50%);
+                    width: 1100px;
+                    height: 200px;
+                    border-radius: 4px;
+                    display: flex;
+                }
+
+
+                .box .imgBx{
+                    widows: 150px;
+                    flex: 150;
+                }
+
+                .box .imgBx img{
+                    position:absolute;
+                    top:15%;
+                    right: 20%;
+                }
+
+                .box .imgBx1{
+                    widows: 150px;
+                    flex: 150;
+                }
+
+                .box .imgBx1 img{
+                    position:absolute;
+                    top:0%;
+                    left: 20%;
+                }
+
+                .rightmenu {
+                    font-family: 'Source Sans Pro', sans-serif; background-color: green;
+                 }
+                .outbutton{
+                    position:fixed;
+                    top :0;
+                    right: 0;
+                    background-color:red	;
+                    display: block;
+                    color: white;
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+                .textred{
+                    font-family : 'Kanit', sans-serif;
+                    color: red;
+                }
+                .search{
+                    display: block;
+                    position:absolute;
+                    top: 250px;
+                    left: 25%;
+                    width: 900px;
+                    font-family : 'Kanit', sans-serif;
+                }
+
+                .table{
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;
+                    font-family : 'Kanit', sans-serif;
+                }
+                .content{
+                    font-family : 'Kanit', sans-serif;
+                    text-align: center;
+                }
+                .contianer1{
+                    background-image:url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/A2KqU29/4k-students-in-a-classroom-raising-hands-together_btlakygm__F0000.png) ;
+                    background-size: cover;
+                    position: relative;
+                    top: 0%;
+                    height: 100vh;
+                    z-index: -6;
+                }
+                .overlay1{
+                    position: absolute;
+                    background-color: rgba(255, 255, 255, 0.9);
+                    height: 100%;
+                    width: 100%;
+                    z-index: -5;
+                }
+                .fix{
+                    margin: 0;
+                    padding: 0;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;	
+                    }
+                
+              
+        </style>
+    </head>
+    <body> 
+        </div>
+        <div class="fix">
+            <div class="contianer1">
+                <div class="overlay1"></div>
+            </div>
+        </div>
+
+        
+
+        <div style="position:absolute;width: 100%;top:0%;left:0%">
+        <div class="box">
+            <div class="imgBx1">
+                <img src="https://www.egov.go.th/upload/eservice-thumbnail/img_f5a48f5648fc4b81477c8f2de0215739.png" width="115" height="165">
+            </div>
+            <div class="content">
+                <p style="position:absolute;top: 10%;left: 27.75%;width: 500px;font-size:200%">กองทุนเงินให้กู้ยืมเพื่อการศึกษา</p><br> 
+            </div>
+            <div class="content">
+                <p style="position:absolute;top: 40%;left: 36%;width: 300px;font-size:130%">มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ</p>    
+            </div>
+            <div class="imgBx">
+                <img src="https://www.kmutnb.ac.th/getattachment/about/symbols/logo_kmutnb-(6).png.aspx?width=250&height=246" width="100" height="100">
+            </div>
+        </div>
+        
+        <a class="outbutton" href="{% url 'myWeb:logout' %}">Logout</a> 
+          
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <form action="{% url 'myWeb:searchuser' %}" method="post">
+        {% csrf_token %}
+        <span class="search">
+            ค้นหารหัสนักศึกษา: <input class="kanit" type="text" name="studentid" placeholder="ป้อนรหัสนักศึกษา">
+            <input class="kanit" type="submit" name="search" value="ค้นหา"></a>   
+        </span>    
+        </form>
+        
+        <fieldset class="table">
+        <legend><h3 style="color: #ff9900">รหัสนักศึกษาที่มาใช้บริการ</h3></legend>
+        {% for u in list_all_user %}
+            <a href="{% url 'myWeb:studentloanuserPage' u.id %}">{{u.username}}</a></br>
+        {% endfor %}       
+        </fieldset>
+        </div>
+
+
+    </body>
+</html>

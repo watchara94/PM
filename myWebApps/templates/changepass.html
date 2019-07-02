@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		.ssp {font-family: 'Source Sans Pro', sans-serif}
+		body {margin:0;}
+		* {
+		box-sizing: border-box;
+		}
+
+		fieldset {
+		  display: block;
+		  margin-left: 10px;
+		  margin-right: 2px;
+		  padding-top: 0.35em;
+		  padding-bottom: 0.625em;
+		  padding-left: 0.75em;
+		  padding-right: 0.75em;
+		  border: 2px groove (internal value);
+		  width:380px;
+		  font-size:18px;
+		}
+		.small {
+		  width:300px;
+		}
+		.left {
+		  float:left;
+		  width:50%;
+		}
+		.right {
+		  float:left;
+		  width:50%;
+		}
+		.button {
+		  background-color: #4CAF50; /* Green */
+		  border: none;
+		  color: white;
+		  padding: 16px 32px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin-left: 10px;
+		  margin-right: 2px;
+		  -webkit-transition-duration: 0.4s; /* Safari */
+		  transition-duration: 0.4s;
+		  cursor: pointer;
+		}
+		.button1 {
+		  background-color: white;
+		  color: black;
+		  border: 2px solid #000000;
+		  position: relative;
+		}
+
+		.button1:hover {
+		  background-color: #000000;
+		  color: white;
+		}
+		.rightmenu {
+		   font-family: 'Source Sans Pro', sans-serif; background-color: green;
+		}
+		.leftmenu {
+		   font-family: 'Source Sans Pro', sans-serif; background-color: grey;
+		}
+		ul {
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		  overflow: hidden;
+		  background-color: black	;
+		  position: fixed;
+		  top: 0;
+		  width: 100%;
+		}
+
+		li {
+		  float: left;
+		}
+
+		li a {
+		  display: block;
+		  color: white;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		}
+
+		.rightmenu {
+		  background-color: red;
+		}
+		.contianer{
+			background-image:url(https://www.mx7.com/i/22e/GfDUpm.JPG?fbclid=IwAR2s66fi7kWsj7ERaNnveSpOiOaJqgvvSE1x_EUOSHHzRlBRTHLE_zKfpV0) ;
+			background-size: cover;
+			position: relative;
+			top: 0%;
+			height: 100vh;
+			z-index: -10;
+		}
+		.overlay{
+			position: absolute;
+			background-color: rgba(0, 0, 0, 0.6);
+			height: 100%;
+			width: 100%;
+			z-index: -5;
+		}
+		.fix{
+			margin: 0;
+			padding: 0;
+			position: fixed;
+			top: 0;
+			width: 100%;	
+			}
+	</style>
+</head>
+	<body>
+	<div class="fix">
+			<div class="contianer">
+				<div class="overlay"></div>
+			</div>
+	</div>
+	<div style="position:absolute;width: 100%;top:0%;left:0%">
+	<ul>
+		<li><img src="https://www.kmutnb.ac.th/getattachment/about/symbols/logo_kmutnb-(6).png.aspx?width=250&height=246" width="42" height="42"></li>
+	  	<li><a class="ssp">CHANGE PASSWORD</a></li>
+	</ul>
+		<br><br><h2>{{ err }}</h2>
+		<h2 style="color: white" class="ssp">{{ user }}</h2>
+        <fieldset>
+		{% if users %}
+		<form action="{% url 'myWeb:adminpassChanged' user_id %}" method="post">
+		{% csrf_token %}
+		 <legend><h3 style="color: white" class="ssp">Change Password</h3></legend>
+		 <span class="ssp" style="color: white">
+			Old Password: <input type="password" name="Opassword" placeholder="Old Password"><br><br>
+			New Password: <input type="password" name="Npassword" placeholder="New Password"><br><br>
+			Confirm Password: <input type="password" name="Cpassword" placeholder="Confirm Password"><br><br>
+			<input type="submit" value="Submit">
+		 </span>
+        </form>
+		{% else %}
+		<form action="{% url 'myWeb:passChanged' %}" method="post">
+		{% csrf_token %}
+		 <legend><h3 style="color: white" class="ssp">Change Password</h3></legend>
+		 <span class="ssp" style="color: white">
+			Old Password: <input type="password" name="Opassword" placeholder="Old Password"><br><br>
+			New Password: <input type="password" name="Npassword" placeholder="New Password"><br><br>
+			Confirm Password: <input type="password" name="Cpassword" placeholder="Confirm Password"><br><br>
+			<input type="submit" value="Submit">
+		 </span>
+        </form>
+		{% endif %}
+        <form action="{% url 'myWeb:home' %}" method="get">
+			<input type="submit" value="Back">
+        </form>
+		</fieldset>
+	</div>
+	</body>
+</html>

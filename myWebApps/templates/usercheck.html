@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User check</title>
+        <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+        <style>
+            .kanit {font-family : 'Kanit', sans-serif;}
+            fieldset {
+                display: block;
+                margin-left: 10px;
+                margin-right: 2px;
+                padding-top: 0.35em;
+                padding-bottom: 0.625em;
+                padding-left: 0.75em;
+                padding-right: 0.75em;
+                border: 2px groove (internal value);
+                width:550px;
+                font-size:18px;
+                }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color:none	;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                }
+                .center {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;
+                  }
+                .box{
+                    position:absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,50%);
+                    padding: 20px;
+                    box-sizing: border-box;
+                    
+                }
+                .Logoutbutton{
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    background-color:red	;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;
+                }
+                .outbutton{
+                    position:absolute;
+                    top :0%;
+                    left: 28%;
+                    background-color:red	;
+                    display: block;
+                    color: white;
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+                .contianer1{
+                    background-image:url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/A2KqU29/4k-students-in-a-classroom-raising-hands-together_btlakygm__F0000.png) ;
+                    background-size: cover;
+                    position: relative;
+                    top: 0%;
+                    height: 100vh;
+                    z-index: -6;
+                }
+                .overlay1{
+                    position: absolute;
+                    background-color: rgba(255, 255, 255, 0.9);
+                    height: 100%;
+                    width: 100%;
+                    z-index: -5;
+                }
+                .fix{
+                    margin: 0;
+                    padding: 0;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;	
+                    }
+              
+        </style>
+    </head>
+    <body>
+        </div>
+        <div class="fix">
+            <div class="contianer1">
+                <div class="overlay1"></div>
+            </div>
+        </div>
+        <div style="position:absolute;width: 100%;top:0%;left:0%">
+        <a class="outbutton" href="{% url 'myWeb:home' %}">BACK</a>  
+        <fieldset class="kanit">
+        <h1>History</h1>
+        Username: {{username}}<br><br>
+                {% if log %}
+                <table border="1">
+                <tr>
+                    <th>datetime</th>
+                    <th>package_id</th>
+                    <th>package_name</th>
+                    <th>points</th>
+                    <th>In/Ex</th>
+                </tr>
+                <span>
+                    {% for userLog in log %}
+                </span>
+                <div class="kanit" style="overflow-x:auto;"></div>
+                <tr>
+                    <td style="font-size: 80%">{{userLog.datetime}}</td>
+                    <td style="font-size: 80%">{{userLog.package_id}}</td>
+                    <td style="font-size: 80%">{{userLog.name}}</td>
+                    <td style="font-size: 80%">{{userLog.points}}</td>
+                    <td style="font-size: 80%">{{userLog.InEx}}</td>
+                </tr>
+                </div>
+                </form>
+
+                        {% endfor%}
+                </table>
+                <span class="kanit">
+                {% else %}
+                    There is No History of this Account.
+                {% endif %}
+                </span>
+                </fieldset>
+                <h1>{{err}}</h1>
+            </div>
+
+        
+    </body>
+</html>

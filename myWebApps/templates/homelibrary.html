@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <head>
+        <title>homelibrary</title>
+        <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+        <style>
+            body{
+                margin: 0%;
+                padding: 0%;
+            }
+            .kanit {font-family : 'Kanit', sans-serif;}
+            .contianer{
+                background-image:url(https://images5.alphacoders.com/919/thumb-1920-919004.jpg) ;
+                background-size: cover;
+                position: relative;
+                height: 100vh;
+                z-index: -10;
+            }
+            .overlay{
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.8);
+                height: 100%;
+                width: 100%;
+                z-index: -5;
+            }
+            fieldset {
+                display: block;
+                margin-left: 10px;
+                margin-right: 2px;
+                padding-top: 0.35em;
+                padding-bottom: 0.625em;
+                padding-left: 0.75em;
+                padding-right: 0.75em;
+                border: 2px groove (internal value);
+                width:550px;
+                font-size:18px;
+                }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color:none	;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                }
+                .center {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;
+                  }
+                
+                .box{
+                    position:absolute;
+                    top: 200px;
+                    left: 50%;
+                    padding: 20px;
+                    width: 800px;
+                    height: 600px;
+                    border-radius: 4px;
+                    display: flex;
+                }
+
+                .rightmenu {
+                    font-family: 'Source Sans Pro', sans-serif; background-color: green;
+                 }
+                .outbutton{
+                    font-family : 'Kanit', sans-serif;
+                    position:fixed;
+                    top :0;
+                    right: 0;
+                    background-color:red	;
+                    display: block;
+                    color: white;
+                    text-align: center;
+                    padding: 8px 8px;
+                    text-decoration: none;
+                }
+                .textred{
+                    font-family : 'Kanit', sans-serif;
+                    color: red;
+                }
+                .search{
+                    width: 50%;
+                    color: white;
+                    font-family : 'Kanit', sans-serif;
+                }
+
+                .table{
+                    color: white;
+                    width: 70%;
+                    font-family : 'Kanit', sans-serif;
+                }
+                .pa{
+                    width: 40%;
+                    position:absolute;
+                    top:0;
+                    left: 8%;
+                }
+                .fix{
+                    margin: 0;
+                    padding: 0;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;	
+                    }
+              
+        </style>
+    </head>
+    <body>
+    <div class="fix">
+            <div class="contianer">
+                <div class="overlay"></div>
+            </div>
+    </div>
+            <div class="box">
+                <div style="position:absolute;top: 0%;left: 0%;width: 350px;">
+                    <p class="kanit" style="color: white;font-size : 150%;line-height: 80%;color:#ffcc00">การแลกแต้มกับห้องสมุด</p> 
+                    <p class="kanit" style="color: white">นักศึกษาจะต้องมีแต้มอยู่ในระบบโดยการนำขวดไปใช้บริการกับตู้คัดแยกขวดแลกแต้มเพื่อที่จะนำแต้มมาใช้กับระบบของ
+                        ห้องสมุดโดยจะมีผู้ดูแลทำการจัดการกับแต้มที่นักศึกษามี</p>  
+                </div>
+                <div style="position:absolute;top: 25%;left: 40%;width: 350px;">
+                    <p class="kanit" style="color: white;font-size : 150%;line-height: 80%;color:#ffcc00">ความสำคัญของแต้ม</p> 
+                    <p class="kanit" style="color: white">แต้มในระบบที่นึกศึกษามี 10 แต้ม มีค่าเท่ากับ 1 บาท หากนักศึกษาลืมนำหนังสือมาคืน 1 วัน จะสามารถใช้ 50 
+                        แต้ม แทนเงินในการคืนหนังสือ</p>  
+                </div>
+                <div style="position:absolute;top: 47%;left: 0%;width: 350px;">
+                    <p class="kanit" style="color: white;font-size : 150%;line-height: 80%;color:#ffcc00">การใช้งานของผู้ดูแล</p> 
+                    <p class="kanit" style="color: white">สามารถหารหัสนักศึกษาจากตารางหรือพิมพ์ค้นหาสามารถเข้าไปดูแต้มและทำการจัดการกับแต้มของนักศึกษาได้</p>  
+                </div>
+                <div style="position:absolute;top: 70%;left: 40%;width: 360px;">
+                    <p class="kanit" style="color: white;font-size : 150%;line-height: 80%;color:#ffcc00">ข้อแนะนำ</p> 
+                    <p class="kanit" style="color: white">หากมีปัญหาเกี่ยวกับระบบให้ติดต่อผู้จัดทำหรือแผนกวิชาเทคโนโลยีแมคคาทรอนกส์</p>  
+                </div>
+        </div>  
+        <a class="outbutton" href="{% url 'myWeb:logout' %}">Logout</a> 
+        
+        <div style="position:absolute;top:3%;left:50px">
+            <img src="https://www.kmutnb.ac.th/getattachment/about/symbols/logo_kmutnb-(6).png.aspx?width=250&height=246" width="120" height="120">
+        </div>
+
+        <div style="position:absolute;top:2%;left:200px;width:800px">
+            <p class="kanit" style="color: #ffcc00;font-size : 200%">
+                ห้องสมุดมหาวิทยาลัยเทคโนโลยยีพระจอมเกล้าพระนครเหนือ
+            </p>
+        </div>
+        
+        <div class="pa">
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div style="position:absolute;width: 400px;left:2%;">
+        <form action="{% url 'myWeb:searchpoint' %}" method="post">
+        {% csrf_token %}
+        <span class="kanit" style="color:white;font-size : 120%">
+            ค้นหารหัสนักศึกษา: <input class="kanit" type="text" name="studentid" placeholder="ป้อนรหัสนักศึกษา">
+            <input class="kanit" type="submit" name="search" value="ค้นหา">
+        </span> 
+        </form>
+        </div>
+        <br><br>
+        <fieldset class="table">
+        <legend><h3 style="color: #ffcc00">รหัสนักศึกษาที่มาใช้บริการ</h3></legend>
+        {% for u in list_all_user  %}
+            <a style="color: white" href="{% url 'myWeb:libraryuserPage' u.id %}">{{u.username}}</a></br>
+        {% endfor %}  
+                    
+        </fieldset>     
+        </div>
+                        
+ 
+    </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>e-Studentloan</title>
+        <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+        <style>
+            .kanit {font-family : 'Kanit', sans-serif;}
+            body{
+                margin: 0%;
+                padding: 0%;
+            }
+            fieldset {
+                display: block;
+                margin-left: 10px;
+                margin-right: 2px;
+                padding-top: 0.35em;
+                padding-bottom: 0.625em;
+                padding-left: 0.75em;
+                padding-right: 0.75em;
+                border: 2px groove (internal value);
+                width:300px;
+                font-size:18px;
+                }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color:none	;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                }
+                .center {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;
+                  }
+                .box{
+                    position:absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,50%);
+                    padding: 20px;
+                    box-sizing: border-box;
+                    
+                }
+                .contianer{
+                    background-image:url(https://data.1freewallpapers.com/download/library-books-reading-comfort-shelves-1920x1080.jpg) ;
+                    background-size: cover;
+                    position: relative;
+                    top: 0%;
+                    height: 100vh;
+                    z-index: -10;
+                }
+                .overlay{
+                    position: absolute;
+                    background-color: rgba(0, 0, 0, 0.6);
+                    height: 100%;
+                    width: 100%;
+                    z-index: -5;
+                }
+                .fix{
+                    margin: 0;
+                    padding: 0;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;	
+                    }
+                
+              
+        </style>
+    </head>
+    <body>
+        <div class="fix">
+                <div class="contianer">
+                    <div class="overlay"></div>
+                </div>
+        </div>
+        <div style="position:absolute;width: 100%;top:5%;left:40%">
+        <fieldset class="small">
+        <legend><p class="kanit" style="font-size: 150%;color:#ffcc00;line-height: 50%;">แต้มสะสมจากการแลกขวด</p></legend>
+        <span class="kanit" style="font-size: 110%;color:white;line-height: 80%;">
+            Username: {{username}}<br><br>
+            Point(s): {{points}} <br><br> 
+        </span>	
+            <span class="ssp" style="color: white">{{err}}</span>
+            <form action="{% url 'myWeb:libraryexpense' user_id %}" method="post">
+            <span class="ssp" style="color: white">{% csrf_token %}</span>
+            <input class="kanit" type="text" name="ex_points" placeholder="จำนวนแต้มที่ต้องการลบแต้ม">
+            <input class="kanit" type="submit" value="ลบแต้ม">
+            </span>
+            </form>
+            </span>	
+        </fieldset> 
+        </div>                        
+    </body>
+</html>

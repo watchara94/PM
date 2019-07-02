@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+		.ssp {font-family: 'Source Sans Pro', sans-serif}
+		body {margin:0;}
+
+		* {
+		box-sizing: border-box;
+		}
+
+		fieldset {
+	display: block;
+	margin-left: 10px;
+	margin-right: 2px;
+	padding-top: 0.35em;
+	padding-bottom: 0.625em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
+	border: 2px groove (internal value);
+	width:550px;
+		font-size:18px;
+		}
+		.small {
+		width:300px;
+		}
+		.left {
+		float:left;
+		width:50%;
+		}
+		.right {
+		float:left;
+		width:50%;
+		}
+		.button {
+		background-color: #4CAF50; /* Green */
+		border: none;
+		color: white;
+		padding: 16px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+			margin-left: 10px;
+		margin-right: 2px;
+		-webkit-transition-duration: 0.4s; /* Safari */
+		transition-duration: 0.4s;
+		cursor: pointer;
+		}
+		.button1 {
+		background-color: white;
+		color: black;
+		border: 2px solid #000000;
+		position: relative;
+		}
+
+		.button1:hover {
+		background-color: #000000;
+		color: white;
+		}
+		/*.rightmenu {
+		background-color: green;
+		}*/
+		ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		background-color: black	;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		}
+
+		li {
+		float: left;
+		}
+
+		.fix{
+		margin: 0;
+		padding: 0;
+		position: fixed;
+		top: 0;
+		width: 100%;	
+		}
+
+		li a {
+		display: block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		}
+
+		.rightmenu {
+			font-family: 'Source Sans Pro', sans-serif; background-color: red;
+		}
+		.contianer{
+			background-image:url(https://www.mx7.com/i/22e/GfDUpm.JPG?fbclid=IwAR2s66fi7kWsj7ERaNnveSpOiOaJqgvvSE1x_EUOSHHzRlBRTHLE_zKfpV0) ;
+			background-size: cover;
+			position: relative;
+			top: 0%;
+			height: 100vh;
+			z-index: -10;
+		}
+		.overlay{
+			position: fixed;
+			background-color: rgba(0, 0, 0, 0.6);
+			height: 100%;
+			width: 100%;
+			z-index: -5;
+		}
+		</style>
+	</head>
+	<body>
+	<div class="fix">
+		<div class="contianer">
+			<div class="overlay"></div>
+		</div>
+	</div>
+	
+	<div style="position:absolute;width: 100%;top:0%;left:0%">
+	<ul>
+		<li><img src="https://www.kmutnb.ac.th/getattachment/about/symbols/logo_kmutnb-(6).png.aspx?width=250&height=246" width="42" height="42"></li>
+		<li><a class="ssp">DATA</a></li>
+        <li style="float:right"><a class="rightmenu" href="{% url 'myWeb:logout' %}">Logout</a></li>
+        <li style="float:right"><a class="ssp" href="{% url 'myWeb:home' %}">{{ user.get_username }}</a></li>
+	</ul>
+	</br>
+	</br>
+		<fieldset class="small">
+		 <legend><h3 class="ssp" style="color: white" >User Informations</h3></legend>
+		 <span class="ssp" style="color: white">
+			Username: {{username}}<br><br>
+			Point(s): {{points}} <br><br>
+		 </span>
+		 	<form action="{% url 'myWeb:adminchangepass' user_id %}" method="get"><!-- url 'myWeb:adminchangepass'ไปที่urlพร้อมกับค่าuser id  -->
+			<span class="ssp" style="color: white">
+			</span>
+				<input type="submit" value="Change Password">
+			</form>
+		</fieldset>
+		<fieldset>
+		<legend><h3 class="ssp" style="color: white">History</h3></legend>
+				<span class="ssp" style="color: white">{% if log %}</span>
+					<table border="1">
+					<tr class="ssp" style="color: white">
+						<th>datetime</th>
+						<th>package_id</th>
+						<th>package_name</th>
+						<th>points</th>
+						<th>In/Ex</th>
+					</tr>
+							<span class="ssp" style="color: white">{% for userLog in log %}</span>
+							<div style="overflow-x:auto;"></div>
+							<tr class="ssp" style="color: white">
+								<form action="{% url 'myWeb:delete_log' userLog.id %}" method="post">
+								{% csrf_token %}
+								<td style="font-size: 80%">{{userLog.datetime}}</td>
+								<td style="font-size: 80%">{{userLog.package_id}}</td>
+								<td style="font-size: 80%">{{userLog.name}}</td>
+								<td style="font-size: 80%">{{userLog.points}}</td>
+								<td style="font-size: 80%">{{userLog.InEx}}</td>
+								<td><input type="submit" name="delete" value="Delete"></td>
+								</form>
+							</tr>
+							</div>
+							<span>{% endfor%}</span>
+					</table></br></br></br>
+					<span class="ssp" style="color: white">{{err}}</span>
+					<form action="{% url 'myWeb:expense' user_id %}" method="post">
+					<span class="ssp" style="color: white">{% csrf_token %}</span>
+					<input type="text" name="ex_points" placeholder="Expense Points">
+					<input type="submit" value="Expense">
+					</form>
+				<span class="ssp" style="color: white">
+					{% else %}
+						There is No History of this Account.
+					{% endif %}
+				</span>
+		</fieldset>
+	</div>
+	</body>
+</html>
